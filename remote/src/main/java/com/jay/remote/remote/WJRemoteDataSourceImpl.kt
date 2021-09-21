@@ -5,9 +5,8 @@ import com.jay.data.remote.WJRemote
 import com.jay.remote.remote.api.ApiService
 import com.jay.remote.remote.mapper.WJRemoteMapper
 import io.reactivex.Single
-import javax.inject.Inject
 
-class WJRemoteDataSourceImpl @Inject constructor(
+class WJRemoteDataSourceImpl constructor(
     private val service: ApiService
 ) : WJRemote {
 
