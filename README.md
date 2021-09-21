@@ -1,27 +1,17 @@
 # clean-architecture-boilerplate
-___
 
 
 ## Libraries
 
 * Kotlin
-
 * Room
-
 * Android Architecture Components
-
 * RxJava2
-
 * Hilt
-
 * Glide
-
 * Retrofit
-
 * OkHttp
-
 * Gson
-___
 
 
 ## Architecture
