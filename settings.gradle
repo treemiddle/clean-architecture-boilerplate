@@ -1,6 +1,5 @@
 rootProject.name = "wj-clean-architecture"
 include ':app'
-include ':presentation'
 include ':remote'
 include ':domain'
 include ':data'
