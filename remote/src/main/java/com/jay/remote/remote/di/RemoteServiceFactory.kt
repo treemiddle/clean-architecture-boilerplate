@@ -4,12 +4,14 @@ import com.google.gson.FieldNamingPolicy
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
+import com.jay.data.remote.WJRemote
 import com.jay.remote.BuildConfig
+import com.jay.remote.remote.WJRemoteDataSourceImpl
 import com.jay.remote.remote.api.ApiService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ApplicationComponent
+import dagger.hilt.components.SingletonComponent
 import io.reactivex.schedulers.Schedulers
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -19,20 +21,18 @@ import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
 @Module
-@InstallIn(ApplicationComponent::class)
+@InstallIn(SingletonComponent::class)
 object RemoteServiceFactory {
 
     @Provides
     @Singleton
-    fun createService(): ApiService {
-        val retrofit = Retrofit.Builder()
+    fun createService(): Retrofit {
+        return Retrofit.Builder()
             .baseUrl(BuildConfig.BASE_URL)
             .client(createOkhttpClient())
             .addCallAdapterFactory(RxJava2CallAdapterFactory.createWithScheduler(Schedulers.io()))
             .addConverterFactory(GsonConverterFactory.create(createGson()))
             .build()
-
-        return retrofit.create(ApiService::class.java)
     }
 
     @Provides
@@ -63,6 +63,22 @@ object RemoteServiceFactory {
             .addInterceptor(createLoggingInterceptor())
             .readTimeout(60, TimeUnit.SECONDS)
             .build()
+    }
+
+    @Provides
+    @Singleton
+    fun provideRemoteSource(
+        service: ApiService
+    ): WJRemote {
+        return WJRemoteDataSourceImpl(service)
+    }
+
+    @Provides
+    @Singleton
+    fun provideService(
+        retrofit: Retrofit
+    ): ApiService {
+        return retrofit.create(ApiService::class.java)
     }
 
 }
