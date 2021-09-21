@@ -5,6 +5,7 @@
       <module name="wj-clean-architecture.app" target="11" />
       <module name="wj-clean-architecture.cache" target="11" />
       <module name="wj-clean-architecture.presentation" target="11" />
+      <module name="wj-clean-architecture.remote" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>
