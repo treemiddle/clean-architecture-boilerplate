@@ -12,6 +12,7 @@ buildscript {
     ext.room_version = '2.3.0'
     ext.life_cycle_version = '2.3.1'
     ext.mockito_kotlin = '3.2.0'
+    ext.glide_version = '4.12.0'
 
     repositories {
         google()
