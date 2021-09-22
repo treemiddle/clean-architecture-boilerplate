@@ -1,24 +1,16 @@
 package com.jay.wj_clean_architecture.ui.home
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import com.jay.data.WJRepositoryImpl
-import com.jay.domain.repository.WJRepository
-import com.jay.domain.usecase.WJUsecase
-import com.jay.local.WJLocalDataSourceImpl
-import com.jay.remote.remote.WJRemoteDataSourceImpl
 import com.jay.wj_clean_architecture.R
 import com.jay.wj_clean_architecture.databinding.ActivityHomeBinding
-import dagger.hilt.android.AndroidEntryPoint
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
-@AndroidEntryPoint
+
 class HomeActivity : AppCompatActivity() {
 
-    private val viewModel by viewModels<HomeViewModel>()
+    private val viewModel: HomeViewModel by viewModel()
     private lateinit var binding: ActivityHomeBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {

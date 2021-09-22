@@ -8,7 +8,6 @@ import com.jay.domain.model.DomainModel
 import com.jay.domain.repository.WJRepository
 import io.reactivex.Flowable
 import io.reactivex.Single
-import javax.inject.Inject
 
 class WJRepositoryImpl(
     private val localDataSource: WJLocal,

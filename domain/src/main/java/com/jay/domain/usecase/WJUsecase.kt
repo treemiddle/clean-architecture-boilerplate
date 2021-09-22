@@ -3,9 +3,8 @@ package com.jay.domain.usecase
 import com.jay.domain.model.DomainModel
 import com.jay.domain.repository.WJRepository
 import io.reactivex.Flowable
-import javax.inject.Inject
 
-class WJUsecase @Inject constructor(
+class WJUsecase(
     private val repository: WJRepository
 ) {
 

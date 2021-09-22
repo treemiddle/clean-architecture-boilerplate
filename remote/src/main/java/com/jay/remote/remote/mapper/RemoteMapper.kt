@@ -6,6 +6,6 @@ package com.jay.remote.remote.mapper
  */
 interface RemoteMapper<in M, out E> {
 
-    fun mapToRemote(from: M): E
+    fun mapToData(from: M): E
 
 }

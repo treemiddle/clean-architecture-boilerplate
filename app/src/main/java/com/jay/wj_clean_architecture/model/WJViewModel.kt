@@ -1,6 +1,6 @@
 package com.jay.wj_clean_architecture.model
 
-class WJViewModel(
+data class WJViewModel(
     val title: String,
     val link: String,
     val image: String,
@@ -8,5 +8,5 @@ class WJViewModel(
     val pubDate: String,
     val director: String,
     val actor: String,
-    val userRating: String
+    val userRating: Float
 )
