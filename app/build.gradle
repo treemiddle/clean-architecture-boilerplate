@@ -35,7 +35,6 @@ android {
     buildFeatures {
         dataBinding true
     }
-
     defaultConfig {
         multiDexEnabled true
     }
@@ -75,8 +74,21 @@ dependencies {
     implementation 'androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha03'
     kapt 'androidx.hilt:hilt-compiler:1.0.0'
 
+    implementation "androidx.room:room-runtime:$room_version"
+    kapt "androidx.room:room-compiler:$room_version"
+    implementation "androidx.room:room-ktx:$room_version"
+    implementation "androidx.room:room-rxjava2:$room_version"
+    testImplementation "androidx.room:room-testing:$room_version"
+
+    implementation "com.squareup.retrofit2:retrofit:$retrofit"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofit"
+    implementation "com.jakewharton.retrofit:retrofit2-rxjava2-adapter:$retrofit_adapter"
+
+    implementation "com.squareup.okhttp3:logging-interceptor:$okhttp_logging"
+
+
     implementation project(":local")
     implementation project(":remote")
-    implementation project(":domain")
     implementation project(":data")
+    implementation project(":domain")
 }

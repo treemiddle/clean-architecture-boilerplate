@@ -4,6 +4,13 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import com.jay.data.WJRepositoryImpl
+import com.jay.domain.repository.WJRepository
+import com.jay.domain.usecase.WJUsecase
+import com.jay.local.WJLocalDataSourceImpl
+import com.jay.remote.remote.WJRemoteDataSourceImpl
 import com.jay.wj_clean_architecture.R
 import com.jay.wj_clean_architecture.databinding.ActivityHomeBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -11,19 +18,14 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class HomeActivity : AppCompatActivity() {
 
-    private val viewModel: HomeViewModel by viewModels()
-
+    private val viewModel by viewModels<HomeViewModel>()
     private lateinit var binding: ActivityHomeBinding
-//    private val binding: ActivityHomeBinding by lazy {
-//        DataBindingUtil.setContentView<ActivityHomeBinding>(this, R.layout.activity_home).apply {
-//            binding.lifecycleOwner = this@HomeActivity
-//            binding.vm = viewModel
-//        }
-//    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_home)
+        binding.lifecycleOwner = this
+        binding.vm = viewModel
     }
 }

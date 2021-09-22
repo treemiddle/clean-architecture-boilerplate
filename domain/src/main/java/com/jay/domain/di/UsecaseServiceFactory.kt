@@ -2,22 +2,22 @@
 //
 //import com.jay.domain.repository.WJRepository
 //import com.jay.domain.usecase.WJUsecase
-//import com.jay.domain.usecase.WJUsecaseImpl
 //import dagger.Module
 //import dagger.Provides
 //import dagger.hilt.InstallIn
-//import dagger.hilt.components.SingletonComponent
-//import javax.inject.Singleton
+//import dagger.hilt.android.components.ActivityRetainedComponent
+//import dagger.hilt.android.scopes.ActivityRetainedScoped
 //
 //@Module
-//@InstallIn(SingletonComponent::class)
+//@InstallIn(ActivityRetainedComponent::class)
 //object UsecaseServiceFactory {
 //
 //    @Provides
-//    @Singleton
+//    @ActivityRetainedScoped
 //    fun provideUsecase(
 //        repository: WJRepository
 //    ): WJUsecase {
-//        return WJUsecaseImpl(repository)
+//        return WJUsecase(repository)
 //    }
+//
 //}

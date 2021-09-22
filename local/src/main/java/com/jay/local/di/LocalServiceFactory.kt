@@ -34,12 +34,12 @@
 //            applicationContext.applicationContext,
 //            WJDatabase::class.java,
 //            LocalConstants.DATABASE_NAME
-//        ).build()
+//        ).fallbackToDestructiveMigration().build()
 //    }
 //
 //    @Provides
 //    @Singleton
-//    fun provideSharedPrefs(applicationContext: Context): PreferenceHelper {
+//    fun provideSharedPrefs(@ApplicationContext applicationContext: Context): PreferenceHelper {
 //        return PreferenceHelperImpl(applicationContext)
 //    }
 //

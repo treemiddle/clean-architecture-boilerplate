@@ -8,6 +8,7 @@ import com.jay.local.pref.PreferenceHelper
 import io.reactivex.Completable
 import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
+import javax.inject.Inject
 
 class WJLocalDataSourceImpl(
     private val dao: WJDao,

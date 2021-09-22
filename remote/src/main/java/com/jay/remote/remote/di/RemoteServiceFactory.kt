@@ -19,12 +19,18 @@
 //import retrofit2.Retrofit
 //import retrofit2.converter.gson.GsonConverterFactory
 //import java.util.concurrent.TimeUnit
+//import javax.inject.Qualifier
 //import javax.inject.Singleton
 //
 //@Module
 //@InstallIn(SingletonComponent::class)
 //object RemoteServiceFactory {
 //
+//    @Qualifier
+//    @Retention(AnnotationRetention.BINARY)
+//    annotation class AppServiceRetrofit
+//
+//    @AppServiceRetrofit
 //    @Provides
 //    @Singleton
 //    fun createService(): Retrofit {
