@@ -25,7 +25,7 @@ class HomeViewModel(useCase: WJUsecase) : ViewModel() {
         get() = _isLoading
 
     init {
-        useCase.getSearchMovie("영화")
+        useCase.getSearchMovie("city")
             .observeOn(AndroidSchedulers.mainThread())
             .doOnNext { showLoading() }
             .observeOn(Schedulers.computation())
