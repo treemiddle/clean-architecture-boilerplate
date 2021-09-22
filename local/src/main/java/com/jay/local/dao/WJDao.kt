@@ -13,12 +13,12 @@ import io.reactivex.Single
 interface WJDao {
 
     @Query(LocalConstants.SELECT_QUERY)
-    fun getItems(): Single<List<LocalModel>>
-
-    @Query(LocalConstants.DELETE_ALL)
-    fun clearAll(): Completable
+    fun getMovies(): Single<List<LocalModel>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun saveItems(items: List<LocalModel>): Completable
+    fun insertMovies(items: List<LocalModel>): Completable
+
+    @Query(LocalConstants.DELETE_ALL)
+    fun deleteAll(): Completable
 
 }

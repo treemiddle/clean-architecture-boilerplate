@@ -7,8 +7,13 @@ import com.jay.local.constants.LocalConstants
 @Entity(tableName = LocalConstants.TABLE_NAME)
 data class LocalModel(
     @PrimaryKey(autoGenerate = true)
-    var id: Long,
-    val name: String,
+    val id: Long,
     val title: String,
-    val avatar: String
+    val link: String,
+    val image: String,
+    val subtitle: String,
+    val pubDate: String,
+    val director: String,
+    val actor: String,
+    val userRating: String
 )

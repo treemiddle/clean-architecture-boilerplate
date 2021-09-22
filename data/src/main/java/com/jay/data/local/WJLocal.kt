@@ -6,12 +6,8 @@ import io.reactivex.Single
 
 interface WJLocal {
 
-    var lastLocalTime: Long
+    fun getMovies(): Single<List<DataModel>>
 
-    fun clearAll(): Completable
-
-    fun saveItems(items: List<DataModel>): Completable
-
-    fun getItems(): Single<List<DataModel>>
+    fun saveMovies(movies: List<DataModel>): Completable
 
 }

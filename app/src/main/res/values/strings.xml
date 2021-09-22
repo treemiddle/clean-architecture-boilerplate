@@ -1,7 +1,3 @@
 <resources>
     <string name="app_name">wj-clean-architecture</string>
-    <string name="txt__retry">다시 검색</string>
-    <string name="txt__retry_search">재시도</string>
-    <string name="txt_empty_result">검색 결과가 없습니다</string>
-    <string name="txt_error_result">에러 발생</string>
 </resources>

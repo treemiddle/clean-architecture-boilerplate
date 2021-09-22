@@ -14,27 +14,17 @@ class WJLocalDataSourceImpl(
     private val pref: PreferenceHelper
 ) : WJLocal {
 
-    override var lastLocalTime: Long
-        get() = pref.lastLocalTime
-        set(value) {
-            pref.lastLocalTime = value
-        }
-
-    override fun clearAll(): Completable {
-        return dao.clearAll()
-    }
-
-    override fun saveItems(items: List<DataModel>): Completable {
-        return dao.clearAll()
-            .andThen(Single.just(items))
-            .map { it.map(WJLocalMapper::mapToLocal) }
-            .flatMapCompletable(dao::saveItems)
+    override fun getMovies(): Single<List<DataModel>> {
+        return dao.getMovies()
+            .map { it.map(WJLocalMapper::mapToData) }
             .subscribeOn(Schedulers.io())
     }
 
-    override fun getItems(): Single<List<DataModel>> {
-        return dao.getItems()
-            .map { it.map(WJLocalMapper::mapToData) }
+    override fun saveMovies(movies: List<DataModel>): Completable {
+        return dao.deleteAll()
+            .andThen(Single.just(movies))
+            .map { it.map(WJLocalMapper::mapToLocal) }
+            .flatMapCompletable(dao::insertMovies)
             .subscribeOn(Schedulers.io())
     }
 

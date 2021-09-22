@@ -7,19 +7,28 @@ object WJLocalMapper : LocalMapper<LocalModel, DataModel> {
 
     override fun mapToLocal(from: DataModel): LocalModel {
         return LocalModel(
-            id = from.id,
-            name = from.name,
+            id = 0L,
             title = from.title,
-            avatar = from.avatar
+            link = from.link,
+            image = from.image,
+            subtitle = from.subtitle,
+            pubDate = from.pubDate,
+            director = from.director,
+            actor = from.actor,
+            userRating = from.userRating
         )
     }
 
     override fun mapToData(from: LocalModel): DataModel {
         return DataModel(
-            id = from.id,
-            name = from.name,
             title = from.title,
-            avatar = from.avatar
+            link = from.link,
+            image = from.image,
+            subtitle = from.subtitle,
+            pubDate = from.pubDate,
+            director = from.director,
+            actor = from.actor,
+            userRating = from.userRating
         )
     }
 

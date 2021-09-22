@@ -6,16 +6,13 @@ import androidx.lifecycle.ViewModel
 import com.jay.domain.usecase.WJUsecase
 import com.jay.wj_clean_architecture.mapper.WJMapper
 import com.jay.wj_clean_architecture.model.WJViewModel
-import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.addTo
 import io.reactivex.schedulers.Schedulers
-import javax.inject.Inject
 
-@HiltViewModel
-class HomeViewModel @Inject constructor(
-    private val useCase: WJUsecase
+class HomeViewModel(
+    useCase: WJUsecase
 ) : ViewModel() {
 
     private val compositeDisposable = CompositeDisposable()
@@ -29,7 +26,7 @@ class HomeViewModel @Inject constructor(
         get() = _isLoading
 
     init {
-        useCase.getItems()
+        useCase.getSearchMovie("맨")
             .observeOn(AndroidSchedulers.mainThread())
             .doOnNext { showLoading() }
             .observeOn(Schedulers.computation())

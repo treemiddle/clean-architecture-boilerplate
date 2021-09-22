@@ -3,6 +3,8 @@ package com.jay.local.pref
 import android.content.Context
 import androidx.core.content.edit
 import com.jay.local.constants.LocalConstants
+import javax.inject.Inject
+import javax.inject.Singleton
 
 class PreferenceHelperImpl(
     applicationContext: Context

@@ -6,32 +6,28 @@ import com.jay.data.model.DataModel
 import com.jay.data.remote.WJRemote
 import com.jay.domain.model.DomainModel
 import com.jay.domain.repository.WJRepository
-import io.reactivex.Completable
 import io.reactivex.Flowable
 import io.reactivex.Single
+import javax.inject.Inject
 
 class WJRepositoryImpl(
     private val localDataSource: WJLocal,
     private val remoteDataSource: WJRemote
 ) : WJRepository {
 
-    override fun clearAll(): Completable {
-        return localDataSource.clearAll()
-    }
-
-    override fun getItems(): Flowable<List<DomainModel>> {
-        return localDataSource.getItems()
+    override fun getMovies(query: String): Flowable<List<DomainModel>> {
+        return localDataSource.getMovies()
             .onErrorReturn { listOf() }
             .flatMapPublisher { cachedItems ->
                 if (cachedItems.isEmpty()) {
-                    getRemoteItems()
+                    getRemoteItems(query)
                         .map { it.map(WJDataMapper::mapToModel) }
                         .toFlowable()
                         .onErrorReturn { listOf() }
                 } else {
                     val local = Single.just(cachedItems)
                         .map { it.map(WJDataMapper::mapToModel) }
-                    val remote = getRemoteItems()
+                    val remote = getRemoteItems(query)
                         .map { it.map(WJDataMapper::mapToModel) }
                         .onErrorResumeNext { local }
 
@@ -40,10 +36,10 @@ class WJRepositoryImpl(
             }
     }
 
-    private fun getRemoteItems(): Single<List<DataModel>> {
-        return remoteDataSource.getItems()
+    private fun getRemoteItems(query: String): Single<List<DataModel>> {
+        return remoteDataSource.getSearchMovie(query)
             .flatMap { remoteItems ->
-                localDataSource.saveItems(remoteItems)
+                localDataSource.saveMovies(remoteItems)
                     .andThen(Single.just(remoteItems))
             }
     }

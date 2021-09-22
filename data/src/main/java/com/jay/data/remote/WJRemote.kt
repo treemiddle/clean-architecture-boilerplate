@@ -5,6 +5,6 @@ import io.reactivex.Single
 
 interface WJRemote {
 
-    fun getItems(): Single<List<DataModel>>
+    fun getSearchMovie(query: String): Single<List<DataModel>>
 
 }

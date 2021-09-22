@@ -24,10 +24,14 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
 
-            buildConfigField "String", "BASE_URL", "\"https://joe-birch-dsdb.squarespace.com/s/\""
+            buildConfigField "String", "NAVER_BASE_URL", "\"https://openapi.naver.com/\""
+            buildConfigField "String", "NAVER_CLIENT_ID", "\"4htz3Due_zl0kEOqf1yV\""
+            buildConfigField "String", "NAVER_CLIENT_SECRET", "\"ylIahW3W7K\""
         }
         debug {
-            buildConfigField "String", "BASE_URL", "\"https://joe-birch-dsdb.squarespace.com/s/\""
+            buildConfigField "String", "NAVER_BASE_URL", "\"https://openapi.naver.com/\""
+            buildConfigField "String", "NAVER_CLIENT_ID", "\"4htz3Due_zl0kEOqf1yV\""
+            buildConfigField "String", "NAVER_CLIENT_SECRET", "\"ylIahW3W7K\""
         }
     }
     compileOptions {
@@ -36,6 +40,9 @@ android {
     }
     kotlinOptions {
         jvmTarget = '1.8'
+    }
+    testOptions {
+        unitTests.returnDefaultValues = true
     }
 }
 
@@ -59,6 +66,8 @@ dependencies {
 
     implementation "com.google.dagger:hilt-android:$hilt_version"
     kapt "com.google.dagger:hilt-android-compiler:$hilt_version"
+
+    testImplementation "org.mockito.kotlin:mockito-kotlin:$mockito_kotlin"
 
     implementation project(":data")
 }

@@ -7,10 +7,14 @@ object WJDataMapper : DataMapper<DataModel, DomainModel> {
 
     override fun mapToModel(from: DataModel): DomainModel {
         return DomainModel(
-            id = from.id,
-            name = from.name,
             title = from.title,
-            avatar = from.avatar
+            link = from.link,
+            image = from.image,
+            subtitle = from.subtitle,
+            pubDate = from.pubDate,
+            director = from.director,
+            actor = from.actor,
+            userRating = from.userRating
         )
     }
 

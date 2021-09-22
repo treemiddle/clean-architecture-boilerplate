@@ -7,9 +7,14 @@ object WJMapper : Mapper<WJViewModel, DomainModel> {
 
     override fun mapToView(from: DomainModel): WJViewModel {
         return WJViewModel(
-            name = from.name,
             title = from.title,
-            avatar = from.avatar
+            link = from.link,
+            image = from.image,
+            subtitle = from.subtitle,
+            pubDate = from.pubDate,
+            director = from.director,
+            actor = from.actor,
+            userRating = from.userRating
         )
     }
 }
