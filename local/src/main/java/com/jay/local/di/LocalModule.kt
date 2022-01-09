@@ -1,20 +1,46 @@
 package com.jay.local.di
 
-import com.jay.data.local.WJLocal
+import android.content.Context
+import androidx.room.Room
 import com.jay.local.WJDatabase
-import com.jay.local.WJLocalDataSourceImpl
+import com.jay.local.constants.LocalConstants
+import com.jay.local.dao.WJDao
 import com.jay.local.pref.PreferenceHelper
 import com.jay.local.pref.PreferenceHelperImpl
-import org.koin.dsl.module
+import dagger.Module
+import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
+import dagger.hilt.components.SingletonComponent
+import javax.inject.Singleton
 
-val localModule = module {
+@Module
+@InstallIn(SingletonComponent::class)
+object LocalModule {
 
-    single { WJDatabase.Factory.create(get()) }
+    @Provides
+    @Singleton
+    fun providePreferenceHelper(
+        @ApplicationContext applicationContext: Context
+    ): PreferenceHelper {
+        return PreferenceHelperImpl(applicationContext)
+    }
 
-    single { get<WJDatabase>().dao }
+    @Provides
+    @Singleton
+    fun provideDatabase(
+        @ApplicationContext applicationContext: Context
+    ): WJDatabase {
+        return Room.databaseBuilder(
+            applicationContext,
+            WJDatabase::class.java, LocalConstants.DATABASE_NAME
+        )
+            .build()
+    }
 
-    single<PreferenceHelper> { PreferenceHelperImpl(get()) }
-
-    single<WJLocal> { WJLocalDataSourceImpl(get(), get()) }
+    @Provides
+    fun provideWJDao(database: WJDatabase): WJDao {
+        return database.wjDao()
+    }
 
 }

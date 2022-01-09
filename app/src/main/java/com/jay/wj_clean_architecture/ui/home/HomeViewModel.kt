@@ -7,12 +7,15 @@ import com.jay.domain.usecase.WJUsecase
 import com.jay.wj_clean_architecture.mapper.WJMapper
 import com.jay.wj_clean_architecture.model.WJViewModel
 import com.jay.wj_clean_architecture.utils.NotNullMutableLiveData
+import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.addTo
 import io.reactivex.schedulers.Schedulers
+import javax.inject.Inject
 
-class HomeViewModel(useCase: WJUsecase) : ViewModel() {
+@HiltViewModel
+class HomeViewModel @Inject constructor(useCase: WJUsecase) : ViewModel() {
 
     private val compositeDisposable = CompositeDisposable()
 

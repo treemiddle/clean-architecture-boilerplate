@@ -8,20 +8,24 @@ buildscript {
     ext.retrofit_adapter = '1.0.0'
     ext.okhttp = '4.9.1'
     ext.okhttp_logging = '4.9.1'
-    ext.koin_version = '3.1.2'
     ext.room_version = '2.3.0'
     ext.life_cycle_version = '2.3.1'
     ext.mockito_kotlin = '3.2.0'
     ext.glide_version = '4.12.0'
+    ext.plugin = '2.39.1'
+    ext.hilt = '2.38.1'
+    ext.hilt_viewmodel = '1.0.0'
+    ext.hilt_android_compiler = '2.37'
+    ext.hilt_compiler = '1.0.0'
 
     repositories {
         google()
         mavenCentral()
     }
     dependencies {
-        classpath "com.android.tools.build:gradle:4.2.1"
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-
+        classpath "com.android.tools.build:gradle:7.0.0"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.0"
+        classpath 'com.google.dagger:hilt-android-gradle-plugin:2.39.1'
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }

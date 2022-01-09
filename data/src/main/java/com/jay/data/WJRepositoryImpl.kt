@@ -8,8 +8,9 @@ import com.jay.domain.model.DomainModel
 import com.jay.domain.repository.WJRepository
 import io.reactivex.Flowable
 import io.reactivex.Single
+import javax.inject.Inject
 
-class WJRepositoryImpl(
+class WJRepositoryImpl @Inject constructor(
     private val localDataSource: WJLocal,
     private val remoteDataSource: WJRemote
 ) : WJRepository {
