@@ -15,7 +15,9 @@ object RemoteSourceModule {
 
     @Provides
     @Singleton
-    fun provideRemoteSource(): WJRemote {
+    fun provideRemoteSource(
+        service: ApiService
+    ): WJRemote {
         return WJRemoteDataSourceImpl()
     }
 

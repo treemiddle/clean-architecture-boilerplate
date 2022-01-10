@@ -1,3 +1,5 @@
+package com.jay.remote.remote.di
+
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
@@ -20,69 +22,63 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
 
-    //private const val GSON_DATE_FORMAT = "E, dd MMM yyyy HH:mm:ss Z"
+    private const val GSON_DATE_FORMAT = "E, dd MMM yyyy HH:mm:ss Z"
+    private const val CONNECT_TIME = 3000L
+    private const val READ_TIME = 3000L
 
+    @Provides
+    @Singleton
+    fun provideRetrofit(): Retrofit {
+        return Retrofit.Builder()
+            .baseUrl(BuildConfig.NAVER_BASE_URL)
+            .client(provideOkHttp())
+            .addCallAdapterFactory(provideRxAdapter())
+            .addConverterFactory(GsonConverterFactory.create(provideGson()))
+            .build()
+    }
 
-//    @Provides
-//    @Singleton
-//    fun provideRetrofit(): Retrofit {
-//        return Retrofit.Builder()
-//            .baseUrl(BuildConfig.NAVER_BASE_URL)
-//            //.client(provideOkhttp())
-//            .addCallAdapterFactory(RxJava2CallAdapterFactory.createWithScheduler(Schedulers.io()))
-//            .addConverterFactory(GsonConverterFactory.create())
-//            .build()
-//    }
-//
-//    @Provides
-//    @Singleton
-//    fun provideWJInterceptor(): WJInterceptor {
-//        return WJInterceptor()
-//    }
+    @Provides
+    @Singleton
+    fun provideRxAdapter(): RxJava2CallAdapterFactory {
+        return RxJava2CallAdapterFactory.createWithScheduler(Schedulers.io())
+    }
 
-//    @Provides
-//    @Singleton
-//    fun provideGson(): Gson {
-//        return GsonBuilder()
-//            .setLenient()
-//            //.setDateFormat(GSON_DATE_FORMAT)
-//            //.setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
-//            .create()
-//    }
-//
-//    @Provides
-//    @Singleton
-//    fun provideHttpLogging(): HttpLoggingInterceptor {
-//        return HttpLoggingInterceptor().apply {
-//            level = if (BuildConfig.DEBUG) {
-//                HttpLoggingInterceptor.Level.BODY
-//            } else {
-//                HttpLoggingInterceptor.Level.NONE
-//            }
-//        }
-//    }
-//
-//    @Provides
-//    @Singleton
-//    fun provideOkhttp(): OkHttpClient {
-//        return OkHttpClient.Builder()
-//            .connectTimeout(3, TimeUnit.SECONDS)
-//            .readTimeout(3, TimeUnit.SECONDS)
-//            .addInterceptor(provideWJInterceptor())
-//            .addInterceptor(provideHttpLogging())
-//            .build()
-//    }
-//
-//    @Provides
-//    @Singleton
-//    fun provideRxJavaAdapter(): RxJava2CallAdapterFactory {
-//        return RxJava2CallAdapterFactory.createWithScheduler(Schedulers.io())
-//    }
+    @Provides
+    @Singleton
+    fun provideGson(): Gson {
+        return GsonBuilder().setLenient()
+            .setDateFormat(GSON_DATE_FORMAT)
+            .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
+            .create()
+    }
 
-//    @Provides
-//    @Singleton
-//    fun provideGsonConverterFactory(): GsonConverterFactory {
-//        return GsonConverterFactory.create(provideGson())
-//    }
+    @Provides
+    @Singleton
+    fun provideOkHttpLogging(): HttpLoggingInterceptor {
+        return HttpLoggingInterceptor().apply {
+            level = if (BuildConfig.DEBUG) {
+                HttpLoggingInterceptor.Level.BODY
+            } else {
+                HttpLoggingInterceptor.Level.NONE
+            }
+        }
+    }
+
+    @Provides
+    @Singleton
+    fun provideOkHttp(): OkHttpClient {
+        return OkHttpClient.Builder()
+            .connectTimeout(CONNECT_TIME, TimeUnit.SECONDS)
+            .readTimeout(READ_TIME, TimeUnit.SECONDS)
+            .addInterceptor(provideOkHttpLogging())
+            .addInterceptor(provideWJInterceptor())
+            .build()
+    }
+
+    @Provides
+    @Singleton
+    fun provideWJInterceptor(): WJInterceptor {
+        return WJInterceptor()
+    }
 
 }
