@@ -1,22 +1,21 @@
-package com.jay.domain.di
+package com.jay.remote.remote.di
 
-import com.jay.domain.repository.WJRepository
-import com.jay.domain.usecase.WJUsecase
+import com.jay.remote.remote.api.ApiService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import retrofit2.Retrofit
 import javax.inject.Singleton
-
 
 @Module
 @InstallIn(SingletonComponent::class)
-object DomainModule {
+object ApiModule {
 
     @Provides
     @Singleton
-    fun provideWJUsecase(repository: WJRepository): WJUsecase {
-        return WJUsecase(repository)
+    fun provideApiService(retrofit: Retrofit): ApiService {
+        return retrofit.create(ApiService::class.java)
     }
 
 }
